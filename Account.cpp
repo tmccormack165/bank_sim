@@ -63,7 +63,7 @@ Args:
 Return:
     - wire_status (bool)
 */
-Account Account::Wire(Account transfer_acct, int amount){
+bool Account::Wire(Account &transfer_acct, int amount){
     bool wire_status;
     //wire_status = transfer_acct.Deposit(amount);
 
@@ -76,5 +76,5 @@ Account Account::Wire(Account transfer_acct, int amount){
     }
     //cout << "transfer_acct.balance: " << transfer_acct.getBalance() << endl;
 
-    return transfer_acct;
+    return wire_status;
 }

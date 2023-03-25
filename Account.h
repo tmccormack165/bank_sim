@@ -13,7 +13,7 @@ class Account{
         // return bool to indicate status of operation
         bool Deposit(int amount);
         bool Withdraw(int amount);
-        Account Wire(Account transfer_acct, int amount);
+        bool Wire(Account &transfer_acct, int amount);
 
         int getBalance(){return balance;} // inline
 
