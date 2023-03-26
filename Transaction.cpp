@@ -12,12 +12,14 @@ Transaction::Transaction(int amount, int previous_balance, int new_amount,
 void Transaction::History(){
     string status_str;
     if(this->status == true){
-        status_str = "SUCCEEDED";
+        status_str = "Succeeded";
     }
     else{
-        status_str = "FAILED";
+        status_str = "Failed";
     }
-
+    cout << "A " << this->type << " Transaction " << status_str << endl;
+    cout << "$" << this->previous_balance << " --> $" << this->new_balance << endl; 
+    cout << "------------------------------------------" << endl;
     // a <deposit/withdrawl> transaction <failed/succeeded> 
     // $300 --> $500
     // ------------------------------------------
