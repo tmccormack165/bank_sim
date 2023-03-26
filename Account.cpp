@@ -7,7 +7,8 @@ Account::Account()
     balance = 0;
 }
 
-/* Deposit money into an account
+/* 
+Deposit money into an account
 Args:
     - amount (int): the amount of money to deposit
 Return:
@@ -15,18 +16,23 @@ Return:
 */
 bool Account::Deposit(int amount){
     bool status = false;
-    if(amount <= 0){
-        return status;
-    }
-    else{
+    string type = "Deposit";
+    int previous_balance = this->balance;
+
+    if(amount > 0){
         this->balance += amount;
         status = true;
     }
 
+    // record deposit status, amount
+    Transaction t(amount, previous_balance, this->balance, type, status);
+    this->transaction_log.push_back(t);
+
     return status;
 }
 
-/* Withdraw money from an account
+/* 
+Withdraw money from an account
 Args:
     - amount (int): the amount of money to deposit
 Return:
@@ -35,28 +41,29 @@ Return:
 bool Account::Withdraw(int amount){
     bool status = false;
     int new_balance;
+    int previous_balance = this->balance;
+    string type = "Withdrawl";
     new_balance = balance - amount;
-    cout << "NEW BALANCE: " << new_balance << endl;
-    if(amount <= 0){
-        // you cannot withdraw a negative or zero amount
-        return status;
-    }
-    else if(new_balance < 0){
-        // insufficient funds
-        return status;
-    }
-    else{
-        
+
+    
+
+    if(amount > 0 && new_balance > 0){
         // the withdraw amount is not zero and there is enough money in the account
         balance -= amount;
         status = true;
     }
 
+    // save transaction data
+    Transaction t(amount, previous_balance, this->balance, type, status);
+    this->transaction_log.push_back(t);
+
     return status;
     
 }
 
-/* Send money from one account to another account
+
+/* 
+Send money from one account to another account
 Args:
     - transfer_acct (Account)
     - amount (int)
@@ -77,4 +84,14 @@ bool Account::Wire(Account &transfer_acct, int amount){
     //cout << "transfer_acct.balance: " << transfer_acct.getBalance() << endl;
 
     return wire_status;
+}
+
+
+void Account::Report(){
+    //printf("CURRENT BALLANCE: ")
+    cout << "Current Balance: " << this->balance << endl;
+    for(auto item:transaction_log){
+        // each item is a transaction
+        item.History(); // the History method will print out all of the transaction data
+    }
 }
