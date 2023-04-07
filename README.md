@@ -4,7 +4,7 @@ An object-oriented C++ program that simulates all of the general functionalities
 # Usage
 
 ```
-g++ Account.cpp main.cpp Transaction.cpp && ./a.out
+make
 ```
 
 # Sample Output
